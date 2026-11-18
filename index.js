@@ -8,11 +8,11 @@ import { access, mkdir, readFile, stat, unlink, writeFile } from 'node:fs/promis
 import { homedir } from 'node:os'
 import path from 'node:path'
 
-const ROUTE = '/dsh-read-aloud'
+const ROUTE = '/dsh-read-aloud-edge'
 const MAX_TEXT = 8000
 const TIMEOUT_MS = 90_000
 
-const rootDir = () => path.join(process.env.DSH_HOME || path.join(homedir(), '.dsh'), 'read-aloud')
+const rootDir = () => path.join(process.env.DSH_HOME || path.join(homedir(), '.dsh'), 'read-aloud-edge')
 const cacheDir = () => path.join(rootDir(), 'cache')
 
 const EDGE_CANDIDATES = [
@@ -169,6 +169,6 @@ export function apply(ctx) {
         res.writeHead(404, { 'content-type': 'application/json; charset=utf-8' })
         res.end(JSON.stringify({ ok: false, error: 'not-found' }))
       },
-    }), 'dsh-read-aloud: synthesis route')
+    }), 'dsh-read-aloud-edge: synthesis route')
   })
 }

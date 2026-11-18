@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 window.__ModuleLoader__.load({
-  id: 'dsh-read-aloud',
+  id: 'dsh-read-aloud-edge',
   factory(require) {
     const React = require('react')
     const h = React.createElement
-    const PKG = 'dsh-read-aloud'
+    const PKG = 'dsh-read-aloud-edge'
     const SPEEDS = [1, 1.25, 1.5, 2, 2.5, 3, 4]
 
     const isZh = () => {
@@ -49,11 +49,11 @@ window.__ModuleLoader__.load({
 
     async function playText(text) {
       if (state.url !== '') {
-        try { document.querySelector('audio[data-dsh-read-aloud]')?.pause() } catch { /* ignored */ }
+        try { document.querySelector('audio[data-dsh-read-aloud-edge]')?.pause() } catch { /* ignored */ }
       }
       emit({ open: true, status: 'loading', text, url: '', error: '' })
       try {
-        const response = await fetch('/dsh-read-aloud/synthesize', {
+        const response = await fetch('/dsh-read-aloud-edge/synthesize', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ text }),
@@ -80,7 +80,7 @@ window.__ModuleLoader__.load({
         type: 'button',
         title: zh ? '朗读这条回复' : 'Read this reply aloud',
         'aria-label': zh ? '朗读这条回复' : 'Read this reply aloud',
-        'data-dsh-read-aloud-action': messageId,
+        'data-dsh-read-aloud-edge-action': messageId,
         onClick,
         style: {
           border: 'none', background: 'transparent', padding: 0, cursor: 'pointer',
@@ -214,7 +214,7 @@ window.__ModuleLoader__.load({
                 }, speed + '×')))),
         h('audio', {
           ref: audioRef,
-          'data-dsh-read-aloud': '',
+          'data-dsh-read-aloud-edge': '',
           style: { display: 'none' },
           onTimeUpdate: (event) => setCurrent(event.currentTarget.currentTime),
           onLoadedMetadata: (event) => setDuration(event.currentTarget.duration || 0),

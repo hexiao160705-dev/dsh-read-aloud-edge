@@ -1,4 +1,4 @@
 - insert:
-    - id: dsh-read-aloud
-      name: 'dsh-read-aloud'
+    - id: dsh-read-aloud-edge
+      name: 'dsh-read-aloud-edge'
       config: {}
